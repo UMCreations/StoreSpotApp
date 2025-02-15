@@ -1,0 +1,143 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f9;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    background: #6200ea;
+    color: white;
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+nav h1 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+#storeSpotBtn {
+    background: #03dac6;
+    color: black;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#storeSpotBtn:hover {
+    background: #02c5a6;
+}
+
+#storeSpotForm {
+    background: white;
+    padding: 1.5em;
+    margin: 1em;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+#storeSpotForm.hidden {
+    display: none;
+}
+
+#storeSpotForm input[type="text"],
+#storeSpotForm input[type="file"] {
+    padding: 0.5em;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#storeSpotForm button {
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#uploadBtn {
+    background: #6200ea;
+    color: white;
+}
+
+#uploadBtn:hover {
+    background: #5a00d0;
+}
+
+#cancelBtn {
+    background: #ccc;
+}
+
+#gallery {
+    padding: 1em;
+}
+
+#itemsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1em;
+}
+
+.item-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.item-card:hover {
+    transform: scale(1.05);
+}
+
+.item-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.item-card p {
+    padding: 0.5em;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    #itemsGrid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    nav h1 {
+        font-size: 1.2em;
+    }
+
+    #storeSpotBtn {
+        width: 100%;
+        margin-top: 0.5em;
+    }
+
+    #storeSpotForm {
+        padding: 1em;
+    }
+
+    #itemsGrid {
+        grid-template-columns: 1fr;
+    }
+}
