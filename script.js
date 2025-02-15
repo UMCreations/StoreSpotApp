@@ -62,28 +62,37 @@ function uploadToGoogleDrive(name, location, file) {
 }
 
 function displayStoredItems() {
+    if (!gapi.client || !gapi.client.drive) {
+        console.error('Google API client not loaded.');
+        return;
+    }
+
     gapi.client.drive.files.list({
         'pageSize': 10,
-        'fields': "nextPageToken, files(id, name, webContentLink)"
-    }).then(response => {
+        'fields': "nextPageToken, files(id, name, thumbnailLink, description)"
+    }).then(function(response) {
         const files = response.result.files;
-        const itemsGrid = document.getElementById('itemsGrid');
-        itemsGrid.innerHTML = '';
+        const gallery = document.getElementById('itemsGrid');
+        gallery.innerHTML = '';
+
         if (files && files.length > 0) {
             files.forEach(file => {
-                const itemCard = document.createElement('div');
-                itemCard.className = 'item-card';
-                itemCard.innerHTML = `
-                    <img src="${file.webContentLink}" alt="${file.name}">
+                const item = document.createElement('div');
+                item.className = 'item-card';
+                item.innerHTML = `
+                    <img src="${file.thumbnailLink}" alt="${file.name}">
                     <p>${file.name}</p>
                 `;
-                itemsGrid.appendChild(itemCard);
+                gallery.appendChild(item);
             });
         } else {
-            itemsGrid.innerHTML = '<p>No items found.</p>';
+            gallery.innerHTML = '<p>No items stored yet.</p>';
         }
+    }).catch(function(error) {
+        console.error('Error fetching files:', error);
     });
 }
+
 
 window.onload = function() {
     initClient();
