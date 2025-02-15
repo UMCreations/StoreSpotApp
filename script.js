@@ -1,5 +1,5 @@
 const CLIENT_ID = '1086756731753-t04p9b9c9edsaq4kehfhuj6rf3c69tuq.apps.googleusercontent.com';
-const SCOPES = 'https://www.googleapis.com/auth/drive.file';
+const SCOPES =  "https://www.googleapis.com/auth/drive.file";
 
 let authInstance;
 
@@ -35,6 +35,12 @@ document.getElementById('uploadBtn').addEventListener('click', () => {
 });
 
 function uploadToGoogleDrive(name, location, file) {
+    const token = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+    if (!token) {
+        alert("Please sign in first!");
+        return;
+    }
+
     const metadata = {
         name: file.name,
         mimeType: file.type
